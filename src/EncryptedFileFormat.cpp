@@ -11,7 +11,7 @@ const System::Byte Version = 1;
 TBytes EncryptedFileFormat::Build(const TBytes& iv, const TBytes& ciphertext)
 {
     if (iv.Length != IvLength)
-        throw Exception(L"IV повинен мати довжину 10 байт.");
+        throw Exception(L"IV ГЇГ®ГўГЁГ­ГҐГ­ Г¬Г ГІГЁ Г¤Г®ГўГ¦ГЁГ­Гі 10 ГЎГ Г©ГІ.");
 
     TBytes result;
     result.Length = HeaderLength + ciphertext.Length;
@@ -38,18 +38,18 @@ TBytes EncryptedFileFormat::Build(const TBytes& iv, const TBytes& ciphertext)
 EncryptedPayload EncryptedFileFormat::Parse(const TBytes& data)
 {
     if (data.Length < HeaderLength)
-        throw Exception(L"Файл занадто короткий і не містить коректного заголовка.");
+        throw Exception(L"Г”Г Г©Г« Г§Г Г­Г Г¤ГІГ® ГЄГ®Г°Г®ГІГЄГЁГ© Ві Г­ГҐ Г¬ВіГ±ГІГЁГІГј ГЄГ®Г°ГҐГЄГІГ­Г®ГЈГ® Г§Г ГЈГ®Г«Г®ГўГЄГ .");
 
     if (data[0] != static_cast<System::Byte>('T') ||
         data[1] != static_cast<System::Byte>('V') ||
         data[2] != static_cast<System::Byte>('M') ||
         data[3] != static_cast<System::Byte>('1'))
     {
-        throw Exception(L"Невірна сигнатура шифрованого файлу.");
+        throw Exception(L"ГЌГҐГўВіГ°Г­Г  Г±ГЁГЈГ­Г ГІГіГ°Г  ГёГЁГґГ°Г®ГўГ Г­Г®ГЈГ® ГґГ Г©Г«Гі.");
     }
 
     if (data[4] != Version)
-        throw Exception(L"Непідтримувана версія формату шифрованого файлу.");
+        throw Exception(L"ГЌГҐГЇВіГ¤ГІГ°ГЁГ¬ГіГўГ Г­Г  ГўГҐГ°Г±ВіГї ГґГ®Г°Г¬Г ГІГі ГёГЁГґГ°Г®ГўГ Г­Г®ГЈГ® ГґГ Г©Г«Гі.");
 
     TBytes iv;
     iv.Length = IvLength;
